@@ -141,9 +141,5 @@ public class EmailConsumerService {
     if (cycle >= 1_000_000) {
       cycleCount.set(0);
     }
-
-    if (cycleCount.incrementAndGet() % 60 == 0) {
-      log.info("Email consumer active. Cycle #{}", cycleCount.get());
-    }
   }
 }
