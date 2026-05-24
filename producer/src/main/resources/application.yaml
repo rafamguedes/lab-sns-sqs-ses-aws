@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+
+cloud:
+  aws:
+    region:
+      static: us-east-1
+    credentials:
+      access-key: test
+      secret-key: test
+    stack:
+      auto: false
+
+aws:
+  sns:
+    topic:
+      email: arn:aws:sns:us-east-1:000000000000:email-notification-topic
+    endpoint: http://localhost:4566

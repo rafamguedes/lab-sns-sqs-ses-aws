@@ -1,0 +1,35 @@
+server:
+  port: 8081
+
+cloud:
+  aws:
+    region:
+      static: us-east-1
+    credentials:
+      access-key: ${AWS_ACCESS_KEY_ID:test}
+      secret-key: ${AWS_SECRET_ACCESS_KEY:test}
+    stack:
+      auto: false
+    sqs:
+      endpoint: http://localhost:4566
+
+aws:
+  ses:
+    endpoint: http://localhost:4566
+    from: remetente@empresa.com
+    from-name: Notification System
+  sqs:
+    queue:
+      email: http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/email-queue
+      dlq: http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/email-dlq
+    endpoint: http://localhost:4566
+    max-retries: 3
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+  metrics:
+    tags:
+      application: email-consumer
