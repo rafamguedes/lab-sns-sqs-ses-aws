@@ -30,7 +30,6 @@ public class SqsEmailConsumer {
 
   @PostConstruct
   public void start() {
-    // Menos pollers — back-pressure controla o ritmo, não quantidade de threads
     for (int i = 0; i < 5; i++) {
       Thread.ofVirtual().name("sqs-poller-" + i).start(this::runPoller);
     }
