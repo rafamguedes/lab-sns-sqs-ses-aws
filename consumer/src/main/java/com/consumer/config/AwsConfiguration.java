@@ -3,6 +3,7 @@ package com.consumer.config;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.ses.SesAsyncClient;
 import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.ses.SesClient;
 
@@ -13,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import java.net.URI;
 
 @Configuration
-public class AWSConfig {
+public class AwsConfiguration {
 
   @Value("${cloud.aws.region.static}")
   private String region;
@@ -48,5 +49,16 @@ public class AWSConfig {
             StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKey, secretKey)))
         .endpointOverride(URI.create(sesEndpoint))
         .build();
+  }
+
+  @Bean
+  public SesAsyncClient sesAsyncClient() {
+    return SesAsyncClient.builder()
+            .region(Region.of(region))
+            .credentialsProvider(
+                    StaticCredentialsProvider.create(
+                            AwsBasicCredentials.create(accessKey, secretKey)))
+            .endpointOverride(URI.create(sesEndpoint))
+            .build();
   }
 }

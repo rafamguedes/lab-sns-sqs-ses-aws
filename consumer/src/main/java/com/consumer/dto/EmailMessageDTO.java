@@ -13,7 +13,16 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmailMessage implements Serializable {
+public class EmailMessageDTO implements Serializable {
+
+  @NotBlank
+  @JsonProperty("messageId")
+  @JsonAlias({"id"})
+  private String messageId;
+
+  @NotBlank
+  @JsonProperty("tenantId")
+  private String tenantId;
 
   @NotBlank(message = "Recipient must not be blank")
   @Email(message = "Recipient must be a valid email address")

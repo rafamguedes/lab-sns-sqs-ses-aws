@@ -10,6 +10,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmailMessage implements Serializable {
+
+    private String messageId;
+    private String tenantId;
     private String destinatario;
     private String assunto;
     private String corpo;

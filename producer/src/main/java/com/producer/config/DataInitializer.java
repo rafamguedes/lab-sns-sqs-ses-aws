@@ -49,7 +49,7 @@ public class DataInitializer implements CommandLineRunner {
 
         // Gerar clientes em lotes para melhor performance
         int batchSize = 5;
-        int totalClientes = 50;
+        int totalClientes = 1000;
         int clientesInseridos = 0;
 
         // Clientes fixos para teste rápido

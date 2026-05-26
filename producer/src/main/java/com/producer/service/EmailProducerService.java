@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -31,8 +32,13 @@ public class EmailProducerService {
         log.info("Enviando emails para {} clientes", clientes.size());
 
         for (ClienteEntity cliente : clientes) {
+            var messageId = UUID.randomUUID().toString();
+            var tenantId = UUID.randomUUID().toString();
+
             try {
                 EmailMessage mensagem = new EmailMessage(
+                        messageId,
+                        tenantId,
                         cliente.getEmail(),
                         assunto,
                         corpo,
