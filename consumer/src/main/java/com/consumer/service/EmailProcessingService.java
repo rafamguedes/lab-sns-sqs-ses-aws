@@ -71,10 +71,6 @@ public class EmailProcessingService {
       log.error("Invalid JSON payload messageId={}", message.messageId(), e);
       delete(message);
 
-    } catch (SesException e) {
-      String errorCode = e.awsErrorDetails() != null ? e.awsErrorDetails().errorCode() : "UNKNOWN";
-      log.error("SES error messageId={} errorCode={}", message.messageId(), errorCode, e);
-
     } catch (SdkException e) {
       log.error("AWS SDK error messageId={}", message.messageId(), e);
 
